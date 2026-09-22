@@ -11,13 +11,13 @@ main{max-width:1500px;margin:auto;padding:16px} header{display:flex;justify-cont
 h1{font:400 28px Georgia,serif;letter-spacing:.08em;margin:0} p{margin:3px 0;color:var(--muted);font-size:11px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:15px;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .tracker{min-width:1390px;padding:12px} .monthbar,.row{display:grid;grid-template-columns:190px repeat(365,3px);align-items:center}
-.monthbar{margin-bottom:7px} .corner{font-size:9px;color:var(--muted);letter-spacing:.08em;position:sticky;left:0;z-index:5;background:var(--card);height:20px;display:flex;align-items:center;padding-right:8px}
+.monthbar{margin-bottom:7px} .corner{font-size:9px;color:var(--muted);letter-spacing:.08em;position:sticky;left:12px;z-index:5;background:var(--card);height:20px;display:flex;align-items:center;padding-right:8px}
 .month{height:20px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;border-radius:4px 4px 0 0}
-.row{margin:7px 0} .label{position:sticky;left:0;z-index:2;background:var(--card);height:18px;display:flex;align-items:center;gap:6px;padding-right:8px;white-space:nowrap}
+.row{margin:7px 0} .label{position:sticky;left:12px;z-index:2;background:var(--card);height:18px;display:flex;align-items:center;gap:6px;padding-right:8px;white-space:nowrap}
 .label b{font-size:11px} .label span{font-size:10px;font-weight:400;color:var(--muted)}
 .day{display:block;width:3px;height:17px;background:var(--empty)} .day.na{opacity:.13} .day.future{opacity:.4}
-.divider{height:1px;background:var(--line);margin:13px 0 9px 190px} .group{position:sticky;left:0;z-index:4;width:190px;background:var(--card);padding-right:8px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.weekly-wrap{margin:8px 0 2px 0;display:flex;flex-direction:column;gap:7px}.weekly-item{padding-left:0}.weekly-item{display:flex;align-items:center;gap:9px;font-size:11px;position:sticky;left:0;z-index:2;background:var(--card);width:fit-content;padding-right:10px}.weekly-item b{min-width:110px}.weekly-dots{display:flex;gap:5px}.weekly-dot{width:11px;height:11px;border:1.5px solid var(--line);border-radius:50%;background:transparent}.weekly-count,.weekly-streak{font-size:10px;color:var(--muted)}.legend{display:flex;flex-wrap:wrap;gap:7px 12px;margin-top:9px;font-size:10px;color:var(--muted)} .legend i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:4px}
+.divider{height:1px;background:var(--line);margin:13px 0 9px 190px} .group{position:sticky;left:12px;z-index:4;width:190px;background:var(--card);padding-left:0;padding-right:8px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.weekly-wrap{margin:8px 0 2px 0;display:flex;flex-direction:column;gap:7px}.weekly-item{padding-left:0}.weekly-item{display:flex;align-items:center;gap:9px;font-size:11px;position:sticky;left:12px;z-index:2;background:var(--card);width:fit-content;padding-right:10px}.weekly-item b{min-width:110px}.weekly-dots{display:flex;gap:5px}.weekly-dot{width:11px;height:11px;border:1.5px solid var(--line);border-radius:50%;background:transparent}.weekly-count,.weekly-streak{font-size:10px;color:var(--muted)}.legend{display:flex;flex-wrap:wrap;gap:7px 12px;margin-top:9px;font-size:10px;color:var(--muted)} .legend i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:4px}
 @media(max-width:600px){main{padding:10px 7px}header{align-items:start;flex-direction:column}h1{font-size:22px}}
 </style>
 </head>
@@ -71,10 +71,12 @@ function isDailyComplete(h,date) {
          !(h.missedDates || []).includes(date);
 }
 function monthlyStreak(h, data) {
-  const ym = data.lastUpdated.slice(0,7);
   const completed = new Set(h.completedMonths || []);
-  if (!completed.has(ym)) return 0;
-  let [y,m] = ym.split("-").map(Number), n=0;
+  let [y,m] = data.lastUpdated.slice(0,7).split("-").map(Number);
+  const current=`${y}-${String(m).padStart(2,"0")}`;
+  // An unfinished current month is pending, not a broken streak.
+  if (!completed.has(current)) { m--; if(m===0){m=12;y--;} }
+  let n=0;
   while (completed.has(`${y}-${String(m).padStart(2,"0")}`)) {
     n++; m--; if (m===0) {m=12;y--;}
   }
@@ -87,7 +89,12 @@ function monthlyStatus(h,data) {
     let [y,m]=ym.split("-").map(Number);
     let half = parseInt(data.lastUpdated.slice(8,10)) <= 15 ? "A" : "B";
     let key=`${y}-${String(m).padStart(2,"0")}-${half}`;
-    if (!periods.has(key)) return "";
+    // Current half can still be in progress; back up to the latest completed half.
+    if (!periods.has(key)) {
+      if (half==="B") half="A";
+      else { half="B"; m--; if(m===0){m=12;y--;} }
+      key=`${y}-${String(m).padStart(2,"0")}-${half}`;
+    }
     let n=0;
     while(periods.has(key)) {
       n++;
@@ -95,7 +102,9 @@ function monthlyStatus(h,data) {
       else { half="B"; m--; if(m===0){m=12;y--;} }
       key=`${y}-${String(m).padStart(2,"0")}-${half}`;
     }
-    return `🔥 ${n}`;
+    if(!n) return "";
+    const months=n/2;
+    return `🔥 ${Number.isInteger(months)?months:months.toFixed(1)} months`;
   }
   const n=monthlyStreak(h,data);
   return n ? `🔥 ${n} month${n===1?"":"s"}` : "";
