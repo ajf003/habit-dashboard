@@ -97,8 +97,8 @@
     {
       "id": "shower",
       "name": "Shower",
-      "startDate": "2026-09-22",
-      "completeThrough": null,
+      "startDate": "2026-09-19",
+      "completeThrough": "2026-09-22",
       "missedDates": []
     }
   ],
