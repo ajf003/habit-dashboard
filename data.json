@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "year": 2026,
-  "lastUpdated": "2026-09-21",
+  "lastUpdated": "2026-09-22",
   "monthColors": {
     "10": null,
     "11": null,
@@ -28,7 +28,7 @@
       "id": "gratitudes",
       "name": "Gratitudes",
       "startDate": "2026-01-01",
-      "completeThrough": "2026-09-21",
+      "completeThrough": "2026-09-22",
       "missedDates": []
     },
     {
