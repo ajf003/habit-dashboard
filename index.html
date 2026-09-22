@@ -16,7 +16,7 @@ h1{font:400 28px Georgia,serif;letter-spacing:.08em;margin:0} p{margin:3px 0;col
 .row{margin:7px 0} .label{position:sticky;left:0;z-index:2;background:var(--card);height:18px;display:flex;align-items:center;gap:6px;padding-right:8px;white-space:nowrap}
 .label b{font-size:11px} .label span{font-size:10px;font-weight:400;color:var(--muted)}
 .day{display:block;width:3px;height:17px;background:var(--empty)} .day.na{opacity:.13} .day.future{opacity:.4}
-.divider{height:1px;background:var(--line);margin:13px 0 9px 190px} .group{margin-left:190px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.divider{height:1px;background:var(--line);margin:13px 0 9px 190px} .group{position:sticky;left:0;z-index:4;width:190px;background:var(--card);padding-right:8px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .weekly-wrap{margin:8px 0 2px 0;display:flex;flex-direction:column;gap:7px}.weekly-item{padding-left:0}.weekly-item{display:flex;align-items:center;gap:9px;font-size:11px;position:sticky;left:0;z-index:2;background:var(--card);width:fit-content;padding-right:10px}.weekly-item b{min-width:110px}.weekly-dots{display:flex;gap:5px}.weekly-dot{width:11px;height:11px;border:1.5px solid var(--line);border-radius:50%;background:transparent}.weekly-count,.weekly-streak{font-size:10px;color:var(--muted)}.legend{display:flex;flex-wrap:wrap;gap:7px 12px;margin-top:9px;font-size:10px;color:var(--muted)} .legend i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:4px}
 @media(max-width:600px){main{padding:10px 7px}header{align-items:start;flex-direction:column}h1{font-size:22px}}
 </style>
@@ -165,6 +165,8 @@ async function render() {
   }
   tracker.appendChild(bar);
 
+  const dgroup=document.createElement("div"); dgroup.className="group"; dgroup.textContent="Daily"; tracker.appendChild(dgroup);
+
   for(const h of data.dailyHabits) {
     const row=document.createElement("div"); row.className="row";
     const label=document.createElement("div"); label.className="label";
@@ -185,24 +187,42 @@ async function render() {
   if ((data.weeklyGoals||[]).length) {
     const wdiv=document.createElement("div"); wdiv.className="divider"; tracker.appendChild(wdiv);
     const wgroup=document.createElement("div"); wgroup.className="group"; wgroup.textContent="Weekly goals"; tracker.appendChild(wgroup);
-    const wrap=document.createElement("div"); wrap.className="weekly-wrap";
     for(const h of data.weeklyGoals) {
       const info=weeklyInfo(h,data);
-      const item=document.createElement("div"); item.className="weekly-item";
-      const name=document.createElement("b"); name.textContent=h.name; item.appendChild(name);
+      const row=document.createElement("div"); row.className="row";
+      const label=document.createElement("div"); label.className="label";
+      label.style.gap="7px";
+      const name=document.createElement("b"); name.textContent=h.name; label.appendChild(name);
       const dots=document.createElement("span"); dots.className="weekly-dots";
-      const color=data.monthColors[String(info.weekStart.getMonth()+1).padStart(2,"0")] || FALLBACK;
+      const currentColor=data.monthColors[String(info.weekStart.getMonth()+1).padStart(2,"0")] || FALLBACK;
       for(let i=0;i<info.target;i++) {
         const dot=document.createElement("i"); dot.className="weekly-dot";
-        if(i<info.count){dot.style.background=color;dot.style.borderColor=color;}
+        if(i<info.count){dot.style.background=currentColor;dot.style.borderColor=currentColor;}
         dots.appendChild(dot);
       }
-      item.appendChild(dots);
-      const count=document.createElement("span"); count.className="weekly-count"; count.textContent=info.count+"/"+info.target+(info.count>=info.target?" ✓":""); item.appendChild(count);
-      if(info.streak){const st=document.createElement("span");st.className="weekly-streak";st.textContent="🔥 "+info.streak+" week"+(info.streak===1?"":"s");item.appendChild(st);}
-      wrap.appendChild(item);
+      label.appendChild(dots);
+      const count=document.createElement("span"); count.className="weekly-count"; count.textContent=info.count+"/"+info.target+(info.count>=info.target?" ✓":""); label.appendChild(count);
+      if(info.streak){const st=document.createElement("span");st.className="weekly-streak";st.textContent="🔥 "+info.streak;label.appendChild(st);}
+      row.appendChild(label);
+
+      const completed=(h.completedDates||[]).map(parseISO);
+      const target=h.targetPerWeek||1;
+      for(let m=1;m<=12;m++) for(let d=1;d<=daysInMonth(year,m);d++) {
+        const dateObj=new Date(year,m-1,d);
+        const date=isoDate(year,m,d);
+        const cell=document.createElement("span"); cell.className="day"; cell.title=`${MONTHS[m-1]} ${d}`;
+        if(date < h.startDate) cell.classList.add("na");
+        else {
+          const ws=startOfWeekSunday(dateObj);
+          const we=new Date(ws); we.setDate(we.getDate()+6);
+          const n=completed.filter(x=>x>=ws && x<=we).length;
+          if(n>=target) cell.style.background=data.monthColors[String(m).padStart(2,"0")] || FALLBACK;
+          else if(date > data.lastUpdated) cell.classList.add("future");
+        }
+        row.appendChild(cell);
+      }
+      tracker.appendChild(row);
     }
-    tracker.appendChild(wrap);
   }
 
   const div=document.createElement("div"); div.className="divider"; tracker.appendChild(div);
