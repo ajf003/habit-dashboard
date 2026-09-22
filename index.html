@@ -17,7 +17,7 @@ h1{font:400 28px Georgia,serif;letter-spacing:.08em;margin:0} p{margin:3px 0;col
 .label b{font-size:11px} .label span{font-size:10px;font-weight:400;color:var(--muted)}
 .day{display:block;width:3px;height:17px;background:var(--empty)} .day.na{opacity:.13} .day.future{opacity:.4}
 .divider{height:1px;background:var(--line);margin:13px 0 9px 190px} .group{margin-left:190px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.legend{display:flex;flex-wrap:wrap;gap:7px 12px;margin-top:9px;font-size:10px;color:var(--muted)} .legend i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:4px}
+.weekly-wrap{margin:8px 0 2px 190px;display:flex;flex-direction:column;gap:7px}.weekly-item{display:flex;align-items:center;gap:9px;font-size:11px}.weekly-item b{min-width:110px}.weekly-dots{display:flex;gap:5px}.weekly-dot{width:11px;height:11px;border:1.5px solid var(--line);border-radius:50%;background:transparent}.weekly-count,.weekly-streak{font-size:10px;color:var(--muted)}.legend{display:flex;flex-wrap:wrap;gap:7px 12px;margin-top:9px;font-size:10px;color:var(--muted)} .legend i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:4px}
 @media(max-width:600px){main{padding:10px 7px}header{align-items:start;flex-direction:column}h1{font-size:22px}}
 </style>
 </head>
@@ -109,6 +109,33 @@ function monthlyComplete(h,m) {
   return (h.completedMonths||[]).includes(ym);
 }
 
+
+function startOfWeekSunday(date) {
+  const d=new Date(date.getFullYear(),date.getMonth(),date.getDate());
+  d.setDate(d.getDate()-d.getDay());
+  return d;
+}
+function weeklyInfo(h,data) {
+  const asOf=parseISO(data.lastUpdated);
+  const weekStart=startOfWeekSunday(asOf);
+  const weekEnd=new Date(weekStart); weekEnd.setDate(weekEnd.getDate()+6);
+  const dates=(h.completedDates||[]).map(parseISO);
+  const count=dates.filter(d=>d>=weekStart && d<=weekEnd).length;
+  const target=h.targetPerWeek||1;
+  let streak=0;
+  let cursor=new Date(weekStart);
+  if(count>=target) streak=1;
+  else cursor.setDate(cursor.getDate()-7);
+  while(cursor >= parseISO(h.startDate)) {
+    const end=new Date(cursor); end.setDate(end.getDate()+6);
+    const n=dates.filter(d=>d>=cursor && d<=end).length;
+    if(n<target) break;
+    streak++;
+    cursor.setDate(cursor.getDate()-7);
+  }
+  return {count,target,streak,weekStart};
+}
+
 async function render() {
   const res = await fetch("./data.json?ts="+Date.now(), {cache:"no-store"});
   if(!res.ok) throw new Error("Could not load data.json");
@@ -152,6 +179,30 @@ async function render() {
       row.appendChild(cell);
     }
     tracker.appendChild(row);
+  }
+
+
+  if ((data.weeklyGoals||[]).length) {
+    const wdiv=document.createElement("div"); wdiv.className="divider"; tracker.appendChild(wdiv);
+    const wgroup=document.createElement("div"); wgroup.className="group"; wgroup.textContent="Weekly goals"; tracker.appendChild(wgroup);
+    const wrap=document.createElement("div"); wrap.className="weekly-wrap";
+    for(const h of data.weeklyGoals) {
+      const info=weeklyInfo(h,data);
+      const item=document.createElement("div"); item.className="weekly-item";
+      const name=document.createElement("b"); name.textContent=h.name; item.appendChild(name);
+      const dots=document.createElement("span"); dots.className="weekly-dots";
+      const color=data.monthColors[String(info.weekStart.getMonth()+1).padStart(2,"0")] || FALLBACK;
+      for(let i=0;i<info.target;i++) {
+        const dot=document.createElement("i"); dot.className="weekly-dot";
+        if(i<info.count){dot.style.background=color;dot.style.borderColor=color;}
+        dots.appendChild(dot);
+      }
+      item.appendChild(dots);
+      const count=document.createElement("span"); count.className="weekly-count"; count.textContent=info.count+"/"+info.target+(info.count>=info.target?" ✓":""); item.appendChild(count);
+      if(info.streak){const st=document.createElement("span");st.className="weekly-streak";st.textContent="🔥 "+info.streak+" week"+(info.streak===1?"":"s");item.appendChild(st);}
+      wrap.appendChild(item);
+    }
+    tracker.appendChild(wrap);
   }
 
   const div=document.createElement("div"); div.className="divider"; tracker.appendChild(div);
