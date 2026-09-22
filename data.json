@@ -93,6 +93,13 @@
       "startDate": "2026-09-20",
       "completeThrough": "2026-09-21",
       "missedDates": []
+    },
+    {
+      "id": "shower",
+      "name": "Shower",
+      "startDate": "2026-09-22",
+      "completeThrough": null,
+      "missedDates": []
     }
   ],
   "monthlyHabits": [
@@ -163,6 +170,16 @@
         "2026-05",
         "2026-06"
       ]
+    }
+  ],
+  "weeklyGoals": [
+    {
+      "id": "eye-masks",
+      "name": "Eye Masks",
+      "targetPerWeek": 3,
+      "weekStartsOn": "sunday",
+      "startDate": "2026-09-22",
+      "completedDates": []
     }
   ]
 }
