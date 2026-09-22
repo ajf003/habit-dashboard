@@ -179,23 +179,30 @@
       "targetPerWeek": 3,
       "weekStartsOn": "sunday",
       "startDate": "2026-09-22",
-      "completedDates": []
+      "completedDates": [
+        "2026-09-20"
+      ]
     },
     {
       "id": "exfoliate-bikini",
       "name": "Exfoliate Bikini",
-      "targetPerWeek": 1,
+      "targetPerWeek": 3,
       "weekStartsOn": "sunday",
       "startDate": "2026-09-22",
-      "completedDates": []
+      "completedDates": [
+        "2026-09-20",
+        "2026-09-22"
+      ]
     },
     {
       "id": "nose-pore-mask",
       "name": "Nose Pore Mask",
-      "targetPerWeek": 1,
+      "targetPerWeek": 3,
       "weekStartsOn": "sunday",
       "startDate": "2026-09-22",
-      "completedDates": []
+      "completedDates": [
+        "2026-09-20"
+      ]
     },
     {
       "id": "face-mask",
@@ -203,7 +210,12 @@
       "targetPerWeek": 1,
       "weekStartsOn": "sunday",
       "startDate": "2026-09-22",
-      "completedDates": []
+      "completedDates": [
+        "2026-09-21"
+      ],
+      "autoCompleteWith": [
+        "facial"
+      ]
     }
   ]
 }
