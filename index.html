@@ -40,6 +40,7 @@ function parseISO(s) {
   return new Date(y,m-1,d);
 }
 function daysInMonth(y,m) { return new Date(y,m,0).getDate(); }
+function shortMD(s) { if(!s) return ""; const d=parseISO(s); return `${d.getMonth()+1}/${d.getDate()}`; }
 function dayDiff(a,b) {
   return Math.round((parseISO(b)-parseISO(a))/86400000);
 }
@@ -212,6 +213,8 @@ async function render() {
       label.appendChild(dots);
       const count=document.createElement("span"); count.className="weekly-count"; count.textContent=info.count+"/"+info.target+(info.count>=info.target?" ✓":""); label.appendChild(count);
       if(info.streak){const st=document.createElement("span");st.className="weekly-streak";st.textContent="🔥 "+info.streak;label.appendChild(st);}
+      const latestWeekly=(h.completedDates||[]).slice().sort().pop();
+      if(latestWeekly){const ld=document.createElement("span");ld.className="weekly-streak";ld.textContent="("+shortMD(latestWeekly)+")";label.appendChild(ld);}
       row.appendChild(label);
 
       const completed=(h.completedDates||[]).map(parseISO);
@@ -242,6 +245,10 @@ async function render() {
     const label=document.createElement("div"); label.className="label";
     const status=monthlyStatus(h,data);
     label.innerHTML=`<b>${h.name}</b>${status?`<span>${status}</span>`:""}`;
+    const exactDates=[...(h.completedDates||[])];
+    if(h.completedPeriodsDetailed) exactDates.push(...h.completedPeriodsDetailed.map(x=>x.date).filter(Boolean));
+    const latestExact=exactDates.sort().pop();
+    if(latestExact){const ld=document.createElement("span");ld.textContent="("+shortMD(latestExact)+")";label.appendChild(ld);}
     row.appendChild(label);
     for(let m=1;m<=12;m++) for(let d=1;d<=daysInMonth(year,m);d++) {
       const cell=document.createElement("span"); cell.className="day"; cell.title=`${MONTHS[m-1]} ${d}`;
