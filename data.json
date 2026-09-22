@@ -180,6 +180,30 @@
       "weekStartsOn": "sunday",
       "startDate": "2026-09-22",
       "completedDates": []
+    },
+    {
+      "id": "exfoliate-bikini",
+      "name": "Exfoliate Bikini",
+      "targetPerWeek": 1,
+      "weekStartsOn": "sunday",
+      "startDate": "2026-09-22",
+      "completedDates": []
+    },
+    {
+      "id": "nose-pore-mask",
+      "name": "Nose Pore Mask",
+      "targetPerWeek": 1,
+      "weekStartsOn": "sunday",
+      "startDate": "2026-09-22",
+      "completedDates": []
+    },
+    {
+      "id": "face-mask",
+      "name": "Face Mask",
+      "targetPerWeek": 1,
+      "weekStartsOn": "sunday",
+      "startDate": "2026-09-22",
+      "completedDates": []
     }
   ]
 }
