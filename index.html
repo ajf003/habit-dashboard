@@ -8,7 +8,7 @@
 :root{--bg:#f7f6f3;--card:#fff;--ink:#242424;--muted:#77736d;--line:#dedbd5;--empty:#eceae5}
 *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 main{max-width:1500px;margin:auto;padding:16px} header{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:12px}
-h1{font:400 28px Georgia,serif;letter-spacing:.08em;margin:0} p{margin:3px 0;color:var(--muted);font-size:11px}
+h1{font:400 28px Georgia,serif;letter-spacing:.08em;margin:0} p{margin:3px 0;color:var(--muted);font-size:11px}.header-meta{text-align:right}.header-meta strong{display:block;font-size:12px;color:var(--ink);font-weight:600}.header-meta span{display:block;margin-top:3px;font-size:10px;color:var(--muted)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:15px;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .tracker{min-width:1390px;padding:12px} .monthbar,.row{display:grid;grid-template-columns:190px repeat(365,3px);align-items:center}
 .monthbar{margin-bottom:7px} .corner{font-size:9px;color:var(--muted);letter-spacing:.08em;position:sticky;left:12px;z-index:5;background:var(--card);height:20px;display:flex;align-items:center;padding-right:8px}
@@ -23,7 +23,7 @@ h1{font:400 28px Georgia,serif;letter-spacing:.08em;margin:0} p{margin:3px 0;col
 </head>
 <body>
 <main>
-<header><div><h1>2026 · HABIT TRACKER</h1><p>Year at a glance</p></div><p>Swipe sideways →</p></header>
+<header><div><h1>2026 · HABIT TRACKER</h1><p>Year at a glance</p></div><div class="header-meta"><strong id="dashboardDate"></strong><span id="dayProgress"></span><span>Swipe sideways →</span></div></header>
 <div class="card"><div class="tracker" id="tracker"><p>Loading habit data…</p></div></div>
 <div class="legend" id="legend"></div>
 </main>
@@ -41,6 +41,16 @@ function parseISO(s) {
 }
 function daysInMonth(y,m) { return new Date(y,m,0).getDate(); }
 function shortMD(s) { if(!s) return ""; const d=parseISO(s); return `${d.getMonth()+1}/${d.getDate()}`; }
+function dayOfYear(s) {
+  const d=parseISO(s), start=new Date(d.getFullYear(),0,1);
+  return Math.floor((d-start)/86400000)+1;
+}
+function manicureInfo(h,data) {
+  const ym=data.lastUpdated.slice(0,7);
+  const periods=new Set(h.completedPeriods||[]);
+  const a=periods.has(ym+"-A"), b=periods.has(ym+"-B");
+  return {ym,a,b,count:(a?1:0)+(b?1:0)};
+}
 function dayDiff(a,b) {
   return Math.round((parseISO(b)-parseISO(a))/86400000);
 }
@@ -151,6 +161,10 @@ async function render() {
   if(!res.ok) throw new Error("Could not load data.json");
   const data = await res.json();
   const year = data.year;
+  const asOf=parseISO(data.lastUpdated);
+  document.getElementById("dashboardDate").textContent=asOf.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"});
+  const doy=dayOfYear(data.lastUpdated), total=daysInMonth(year,2)===29?366:365;
+  document.getElementById("dayProgress").textContent=`Day ${doy} of ${total} · ${total-doy} days left`;
   const tracker=document.getElementById("tracker");
   tracker.innerHTML="";
 
@@ -244,7 +258,22 @@ async function render() {
     const row=document.createElement("div"); row.className="row";
     const label=document.createElement("div"); label.className="label";
     const status=monthlyStatus(h,data);
-    label.innerHTML=`<b>${h.name}</b>${status?`<span>${status}</span>`:""}`;
+    if(h.frequency==="twice-monthly") {
+      const name=document.createElement("b"); name.textContent=h.name; label.appendChild(name);
+      const mi=manicureInfo(h,data);
+      const dots=document.createElement("span"); dots.className="weekly-dots";
+      const c=data.monthColors[data.lastUpdated.slice(5,7)] || FALLBACK;
+      for(const done of [mi.a,mi.b]) {
+        const dot=document.createElement("i"); dot.className="weekly-dot";
+        if(done){dot.style.background=c;dot.style.borderColor=c;}
+        dots.appendChild(dot);
+      }
+      label.appendChild(dots);
+      const count=document.createElement("span"); count.textContent=mi.count+"/2"+(mi.count===2?" ✓":""); label.appendChild(count);
+      if(status){const st=document.createElement("span");st.textContent=status;label.appendChild(st);}
+    } else {
+      label.innerHTML=`<b>${h.name}</b>${status?`<span>${status}</span>`:""}`;
+    }
     const exactDates=[...(h.completedDates||[])];
     if(h.completedPeriodsDetailed) exactDates.push(...h.completedPeriodsDetailed.map(x=>x.date).filter(Boolean));
     const latestExact=exactDates.sort().pop();
@@ -253,7 +282,12 @@ async function render() {
     for(let m=1;m<=12;m++) for(let d=1;d<=daysInMonth(year,m);d++) {
       const cell=document.createElement("span"); cell.className="day"; cell.title=`${MONTHS[m-1]} ${d}`;
       const ym=`${year}-${String(m).padStart(2,"0")}`;
-      if(monthlyComplete(h,m)) cell.style.background=data.monthColors[String(m).padStart(2,"0")] || FALLBACK;
+      if(h.frequency==="twice-monthly") {
+        const p=new Set(h.completedPeriods||[]);
+        const half=d<=15?"A":"B";
+        if(p.has(ym+"-"+half)) cell.style.background=data.monthColors[String(m).padStart(2,"0")] || FALLBACK;
+        else if(ym > data.lastUpdated.slice(0,7)) cell.classList.add("future");
+      } else if(monthlyComplete(h,m)) cell.style.background=data.monthColors[String(m).padStart(2,"0")] || FALLBACK;
       else if(ym > data.lastUpdated.slice(0,7)) cell.classList.add("future");
       row.appendChild(cell);
     }
