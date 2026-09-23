@@ -229,6 +229,15 @@
       "autoCompleteWith": [
         "facial"
       ]
+    },
+    {
+      "id": "wash-hair",
+      "name": "Wash Hair",
+      "targetPerWeek": 2,
+      "startDate": "2026-09-23",
+      "completedDates": [
+        "2026-09-23"
+      ]
     }
   ]
 }
