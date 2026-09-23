@@ -42,14 +42,14 @@
       "id": "calendar",
       "name": "Calendar",
       "startDate": "2026-08-01",
-      "completeThrough": "2026-09-21",
+      "completeThrough": "2026-09-22",
       "missedDates": []
     },
     {
       "id": "daily-highlight",
       "name": "Daily Highlight",
       "startDate": "2026-09-01",
-      "completeThrough": "2026-09-21",
+      "completeThrough": "2026-09-22",
       "missedDates": []
     },
     {
