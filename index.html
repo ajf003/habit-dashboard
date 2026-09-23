@@ -180,6 +180,34 @@ function trackingSummary(h,data) {
     const total=entries.reduce((sum,e)=>sum+(Number(e.amount)||0),0);
     return entries.length ? entries.length+"x · $"+total.toFixed(2)+" this month" : "No entries yet";
   }
+  if(h.type==="occurrence") {
+    const all=(h.entries||[]).filter(e=>e.date).map(e=>e.date).sort();
+    if(!all.length) return "No entries yet";
+    const start=parseISO(h.startDate || all[0]);
+    const nowParts=new Intl.DateTimeFormat("en-US",{timeZone:"America/New_York",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
+    const part=t=>Number(nowParts.find(p=>p.type===t).value);
+    const today=new Date(part("year"),part("month")-1,part("day"));
+    const end=today.getFullYear()===data.year ? today : new Date(data.year,11,31);
+    const labels=[];
+    let cursor=new Date(start.getFullYear(),start.getMonth(),1);
+    while(cursor<=end) {
+      const y=cursor.getFullYear(), m=cursor.getMonth();
+      const monthStart=new Date(y,m,1);
+      const monthEnd=new Date(y,m+1,0);
+      const denomStart=(y===start.getFullYear()&&m===start.getMonth()) ? start : monthStart;
+      const denomEnd=(y===end.getFullYear()&&m===end.getMonth()) ? end : monthEnd;
+      const days=Math.max(0,Math.floor((denomEnd-denomStart)/86400000)+1);
+      const prefix=y+"-"+String(m+1).padStart(2,"0");
+      const count=all.filter(d=>d.startsWith(prefix)).length;
+      const pct=days ? Math.round(count/days*100) : 0;
+      labels.push(new Intl.DateTimeFormat("en-US",{month:"short"}).format(cursor)+" "+pct+"%");
+      cursor=new Date(y,m+1,1);
+    }
+    const overallDays=Math.max(1,Math.floor((end-start)/86400000)+1);
+    const overallCount=all.filter(d=>parseISO(d)>=start && parseISO(d)<=end).length;
+    labels.push("Overall "+Math.round(overallCount/overallDays*100)+"%");
+    return labels.join(" · ");
+  }
   return entries.length ? entries.length+"x this month" : "No entries yet";
 }
 function trackingDates(h) {
