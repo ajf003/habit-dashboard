@@ -39,6 +39,14 @@ function parseISO(s) {
   const [y,m,d] = s.split("-").map(Number);
   return new Date(y,m-1,d);
 }
+function easternTodayISO() {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric", month: "2-digit", day: "2-digit"
+  }).formatToParts(new Date());
+  const get = type => parts.find(p => p.type === type).value;
+  return `${get("year")}-${get("month")}-${get("day")}`;
+}
 function daysInMonth(y,m) { return new Date(y,m,0).getDate(); }
 function shortMD(s) { if(!s) return ""; const d=parseISO(s); return `${d.getMonth()+1}/${d.getDate()}`; }
 function dayOfYear(s) {
@@ -206,7 +214,11 @@ async function render() {
   for(const h of data.dailyHabits) {
     const row=document.createElement("div"); row.className="row";
     const label=document.createElement("div"); label.className="label daily-label";
-    label.innerHTML=`<b>${h.name}</b><span>${dailyStatus(h,data)}</span>`;
+    const todayISO=easternTodayISO();
+    const doneToday=isDailyComplete(h,todayISO);
+    const todayMonth=todayISO.slice(5,7);
+    const check=doneToday ? ` <span style="color:${data.monthColors[todayMonth] || FALLBACK};font-weight:700">✓</span>` : "";
+    label.innerHTML=`<b>${h.name}</b><span>${dailyStatus(h,data)}${check}</span>`;
     row.appendChild(label);
     for(let m=1;m<=12;m++) for(let d=1;d<=daysInMonth(year,m);d++) {
       const date=isoDate(year,m,d), cell=document.createElement("span");
