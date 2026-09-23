@@ -300,7 +300,7 @@ async function render() {
         dots.appendChild(dot);
       }
       sub.appendChild(dots);
-      const count=document.createElement("span"); count.className="weekly-count"; count.textContent=info.count+"/"+info.target+(info.count>=info.target?" ✓":""); sub.appendChild(count);
+      const count=document.createElement("span"); count.className="weekly-count"; count.textContent=info.count+"/"+info.target; sub.appendChild(count);
       if(info.streak){const st=document.createElement("span");st.className="weekly-streak";st.textContent="🔥 "+info.streak;sub.appendChild(st);}
       const latestWeekly=(h.completedDates||[]).slice().sort().pop();
       if(latestWeekly){const ld=document.createElement("span");ld.className="weekly-streak";ld.textContent="("+shortMD(latestWeekly)+")";sub.appendChild(ld);}
