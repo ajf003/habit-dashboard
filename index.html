@@ -162,7 +162,21 @@ async function render() {
   const data = await res.json();
   const year = data.year;
   const asOf=parseISO(data.lastUpdated);
-  document.getElementById("dashboardDate").textContent=asOf.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"});
+  // Header date follows the real calendar day in Eastern Time.
+  // Habit completion/status still uses data.lastUpdated, preserving unconfirmed days.
+  function updateDashboardDate() {
+    document.getElementById("dashboardDate").textContent = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/New_York",
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric"
+    }).format(new Date());
+  }
+  updateDashboardDate();
+  if (!window.dashboardDateTimer) {
+    window.dashboardDateTimer = setInterval(updateDashboardDate, 30000);
+  }
   const tracker=document.getElementById("tracker");
   tracker.innerHTML="";
 
