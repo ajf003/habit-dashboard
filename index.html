@@ -224,7 +224,11 @@ function trackingSummary(h,data) {
     const strengthSessions=lower.size+upper.size;
     const lowerSplit=strengthSessions?Math.round(lower.size/strengthSessions*100):0;
     const upperSplit=strengthSessions?100-lowerSplit:0;
-    return "Walk "+pct("Walk")+"%<br>Strength "+strengthPct+"% <span class=\"movement-split\">(Lower "+lowerSplit+"% / Upper "+upperSplit+"%)</span><br>Spin "+pct("Spin")+"% · Run "+pct("Run")+"%<br>Core "+pct("Core")+"% · Pickleball "+pct("Pickleball")+"%";
+    const walksWithMiles=all.filter(e=>e.value==="Walk" && Number.isFinite(Number(e.miles)));
+    const avgMiles=arr=>arr.length ? (arr.reduce((sum,e)=>sum+Number(e.miles),0)/arr.length).toFixed(2) : "—";
+    const augWalks=walksWithMiles.filter(e=>e.date.startsWith("2026-08"));
+    const sepWalks=walksWithMiles.filter(e=>e.date.startsWith("2026-09"));
+    return "Walk "+pct("Walk")+"%<br><span class=\"movement-split\">Avg walk: Aug "+avgMiles(augWalks)+" mi · Sep "+avgMiles(sepWalks)+" mi · Overall "+avgMiles(walksWithMiles)+" mi</span><br>Strength "+strengthPct+"% <span class=\"movement-split\">(Lower "+lowerSplit+"% / Upper "+upperSplit+"%)</span><br>Spin "+pct("Spin")+"% · Run "+pct("Run")+"%<br>Core "+pct("Core")+"% · Pickleball "+pct("Pickleball")+"%";
   }
   return entries.length ? entries.length+"x this month" : "No entries yet";
 }
