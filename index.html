@@ -216,8 +216,15 @@ function trackingSummary(h,data) {
     const all=(h.entries||[]).filter(e=>e.date);
     if(!all.length) return "No entries yet";
     const movementDays=new Set(all.map(e=>e.date));
-    const pct=value=>Math.round(new Set(all.filter(e=>e.value===value).map(e=>e.date)).size/movementDays.size*100);
-    return "Walk "+pct("Walk")+"% · Lower "+pct("Lower Body Strength")+"% · Upper "+pct("Upper Body Strength")+"% · Spin "+pct("Spin")+"% · Pickleball "+pct("Pickleball")+"%";
+    const daysFor=value=>new Set(all.filter(e=>e.value===value).map(e=>e.date));
+    const pct=value=>Math.round(daysFor(value).size/movementDays.size*100);
+    const lower=daysFor("Lower Body Strength"), upper=daysFor("Upper Body Strength");
+    const strength=new Set([...lower,...upper]);
+    const strengthPct=Math.round(strength.size/movementDays.size*100);
+    const strengthSessions=lower.size+upper.size;
+    const lowerSplit=strengthSessions?Math.round(lower.size/strengthSessions*100):0;
+    const upperSplit=strengthSessions?100-lowerSplit:0;
+    return "Walk "+pct("Walk")+"% · Strength "+strengthPct+"% (Lower "+lowerSplit+"% / Upper "+upperSplit+"%) · Spin "+pct("Spin")+"% · Pickleball "+pct("Pickleball")+"%";
   }
   return entries.length ? entries.length+"x this month" : "No entries yet";
 }
