@@ -582,7 +582,7 @@
       "startDate": "2026-08-01",
       "choices": [
         "Walk",
-        "Peloton/Spin",
+        "Spin",
         "Run",
         "Strength",
         "Other",
@@ -669,7 +669,7 @@
         },
         {
           "date": "2026-08-24",
-          "value": "Peloton/Spin"
+          "value": "Spin"
         },
         {
           "date": "2026-08-24",
@@ -685,7 +685,7 @@
         },
         {
           "date": "2026-08-26",
-          "value": "Peloton/Spin"
+          "value": "Spin"
         },
         {
           "date": "2026-08-28",
