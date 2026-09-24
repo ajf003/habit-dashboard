@@ -606,27 +606,33 @@
       "entries": [
         {
           "date": "2026-08-01",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2.8
         },
         {
           "date": "2026-08-02",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2.19
         },
         {
           "date": "2026-08-03",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2.04
         },
         {
           "date": "2026-08-04",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2.38
         },
         {
           "date": "2026-08-05",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2.09
         },
         {
           "date": "2026-08-06",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2.06
         },
         {
           "date": "2026-08-07",
@@ -634,11 +640,13 @@
         },
         {
           "date": "2026-08-10",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2.38
         },
         {
           "date": "2026-08-11",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2.11
         },
         {
           "date": "2026-08-16",
@@ -646,11 +654,13 @@
         },
         {
           "date": "2026-08-16",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2.27
         },
         {
           "date": "2026-08-17",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2.17
         },
         {
           "date": "2026-08-18",
@@ -658,7 +668,8 @@
         },
         {
           "date": "2026-08-18",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2.07
         },
         {
           "date": "2026-08-19",
@@ -666,7 +677,8 @@
         },
         {
           "date": "2026-08-19",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2.13
         },
         {
           "date": "2026-08-20",
@@ -674,7 +686,8 @@
         },
         {
           "date": "2026-08-22",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 5
         },
         {
           "date": "2026-08-24",
@@ -694,7 +707,8 @@
         },
         {
           "date": "2026-08-25",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2
         },
         {
           "date": "2026-08-26",
@@ -710,7 +724,8 @@
         },
         {
           "date": "2026-09-02",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2.71
         },
         {
           "date": "2026-09-03",
@@ -726,7 +741,8 @@
         },
         {
           "date": "2026-09-09",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2.1
         },
         {
           "date": "2026-09-12",
@@ -758,7 +774,8 @@
         },
         {
           "date": "2026-09-16",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2.14
         },
         {
           "date": "2026-09-19",
@@ -778,11 +795,13 @@
         },
         {
           "date": "2026-09-21",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2.37
         },
         {
           "date": "2026-09-22",
-          "value": "Walk"
+          "value": "Walk",
+          "miles": 2.02
         },
         {
           "date": "2026-09-23",
