@@ -154,8 +154,10 @@ function weeklyInfo(h,data) {
   const target=h.targetPerWeek||1;
   let streak=0;
   let cursor=new Date(weekStart);
-  if(count>=target) streak=1;
-  else cursor.setDate(cursor.getDate()-7);
+  if(count>=target) {
+    streak=1;
+    cursor.setDate(cursor.getDate()-7);
+  } else cursor.setDate(cursor.getDate()-7);
   while(cursor >= parseISO(h.startDate)) {
     const end=new Date(cursor); end.setDate(end.getDate()+6);
     const n=dates.filter(d=>d>=cursor && d<=end).length;
@@ -324,10 +326,13 @@ async function render() {
         const cell=document.createElement("span"); cell.className="day"; cell.title=`${MONTHS[m-1]} ${d}`;
         if(date < h.startDate) cell.classList.add("na");
         else {
+          const isActualCompletion=(h.completedDates||[]).includes(date);
           const ws=startOfWeekSunday(dateObj);
           const we=new Date(ws); we.setDate(we.getDate()+6);
           const n=completed.filter(x=>x>=ws && x<=we).length;
-          if(n>=target) cell.style.background=data.monthColors[String(m).padStart(2,"0")] || FALLBACK;
+          // Always show actual completion dates; if the weekly target was met,
+          // also color the rest of that successful week.
+          if(isActualCompletion || n>=target) cell.style.background=data.monthColors[String(m).padStart(2,"0")] || FALLBACK;
           else if(date > data.lastUpdated) cell.classList.add("future");
         }
         row.appendChild(cell);
