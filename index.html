@@ -66,7 +66,7 @@ function currentDailyStreak(h) {
   if (!h.completeThrough) return 0;
   const missed = new Set(h.missedDates || []);
   let d = parseISO(h.completeThrough);
-  const start = parseISO(h.startDate);
+  const start = parseISO(h.streakStartDate || h.startDate);
   let n = 0;
   while (d >= start) {
     const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
@@ -84,8 +84,10 @@ function dailyStatus(h, data) {
   return streak ? `🔥 ${streak}` : "";
 }
 function isDailyComplete(h,date) {
+  if ((h.completedDates || []).includes(date)) return true;
   if (!h.completeThrough) return false;
-  return date >= h.startDate &&
+  const rangeStart=h.streakStartDate || h.startDate;
+  return date >= rangeStart &&
          date <= h.completeThrough &&
          !(h.missedDates || []).includes(date);
 }
@@ -207,6 +209,13 @@ function trackingSummary(h,data) {
     const overallCount=all.filter(d=>parseISO(d)>=start && parseISO(d)<=end).length;
     labels.push("Overall "+Math.round(overallCount/overallDays*100)+"%");
     return labels.join(" · ");
+  }
+  if(h.id==="movement-type" || h.type==="multi-choice") {
+    const all=(h.entries||[]).filter(e=>e.date);
+    if(!all.length) return "No entries yet";
+    const movementDays=new Set(all.map(e=>e.date));
+    const walkDays=new Set(all.filter(e=>e.value==="Walk").map(e=>e.date));
+    return "Walk "+Math.round(walkDays.size/movementDays.size*100)+"%";
   }
   return entries.length ? entries.length+"x this month" : "No entries yet";
 }
