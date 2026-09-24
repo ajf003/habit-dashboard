@@ -65,6 +65,7 @@
         "2026-08-04",
         "2026-08-05",
         "2026-08-06",
+        "2026-08-07",
         "2026-08-10",
         "2026-08-11",
         "2026-08-16",
@@ -72,7 +73,9 @@
         "2026-08-18",
         "2026-08-19",
         "2026-08-22",
+        "2026-08-24",
         "2026-08-25",
+        "2026-08-26",
         "2026-09-02",
         "2026-09-09",
         "2026-09-16",
@@ -582,7 +585,10 @@
         "Peloton/Spin",
         "Run",
         "Strength",
-        "Other"
+        "Other",
+        "Pickleball",
+        "Lower Body Strength",
+        "Upper Body Strength"
       ],
       "entries": [
         {
@@ -610,12 +616,20 @@
           "value": "Walk"
         },
         {
+          "date": "2026-08-07",
+          "value": "Pickleball"
+        },
+        {
           "date": "2026-08-10",
           "value": "Walk"
         },
         {
           "date": "2026-08-11",
           "value": "Walk"
+        },
+        {
+          "date": "2026-08-16",
+          "value": "Lower Body Strength"
         },
         {
           "date": "2026-08-16",
@@ -627,19 +641,55 @@
         },
         {
           "date": "2026-08-18",
+          "value": "Lower Body Strength"
+        },
+        {
+          "date": "2026-08-18",
           "value": "Walk"
+        },
+        {
+          "date": "2026-08-19",
+          "value": "Lower Body Strength"
         },
         {
           "date": "2026-08-19",
           "value": "Walk"
         },
         {
+          "date": "2026-08-20",
+          "value": "Lower Body Strength"
+        },
+        {
           "date": "2026-08-22",
           "value": "Walk"
         },
         {
+          "date": "2026-08-24",
+          "value": "Lower Body Strength"
+        },
+        {
+          "date": "2026-08-24",
+          "value": "Peloton/Spin"
+        },
+        {
+          "date": "2026-08-24",
+          "value": "Upper Body Strength"
+        },
+        {
+          "date": "2026-08-25",
+          "value": "Lower Body Strength"
+        },
+        {
           "date": "2026-08-25",
           "value": "Walk"
+        },
+        {
+          "date": "2026-08-26",
+          "value": "Peloton/Spin"
+        },
+        {
+          "date": "2026-08-28",
+          "value": "Lower Body Strength"
         },
         {
           "date": "2026-09-02",
