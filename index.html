@@ -63,6 +63,20 @@ function dayDiff(a,b) {
   return Math.round((parseISO(b)-parseISO(a))/86400000);
 }
 function currentDailyStreak(h) {
+  const explicit=(h.completedDates||[]).slice().sort();
+  if (!h.completeThrough && explicit.length) {
+    const done=new Set(explicit);
+    let d=parseISO(explicit[explicit.length-1]);
+    const start=parseISO(h.startDate);
+    let n=0;
+    while(d>=start) {
+      const key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+      if(!done.has(key)) break;
+      n++;
+      d.setDate(d.getDate()-1);
+    }
+    return n;
+  }
   if (!h.completeThrough) return 0;
   const missed = new Set(h.missedDates || []);
   let d = parseISO(h.completeThrough);
