@@ -224,7 +224,7 @@ function trackingSummary(h,data) {
     const strengthSessions=lower.size+upper.size;
     const lowerSplit=strengthSessions?Math.round(lower.size/strengthSessions*100):0;
     const upperSplit=strengthSessions?100-lowerSplit:0;
-    return "Walk "+pct("Walk")+"%<br>Strength "+strengthPct+"% <span class=\"movement-split\">(Lower "+lowerSplit+"% / Upper "+upperSplit+"%)</span><br>Spin "+pct("Spin")+"% · Pickleball "+pct("Pickleball")+"%";
+    return "Walk "+pct("Walk")+"%<br>Strength "+strengthPct+"% <span class=\"movement-split\">(Lower "+lowerSplit+"% / Upper "+upperSplit+"%)</span><br>Spin "+pct("Spin")+"% · Run "+pct("Run")+"%<br>Core "+pct("Core")+"% · Pickleball "+pct("Pickleball")+"%";
   }
   return entries.length ? entries.length+"x this month" : "No entries yet";
 }
