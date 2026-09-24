@@ -216,8 +216,8 @@ function trackingSummary(h,data) {
     const all=(h.entries||[]).filter(e=>e.date);
     if(!all.length) return "No entries yet";
     const movementDays=new Set(all.map(e=>e.date));
-    const walkDays=new Set(all.filter(e=>e.value==="Walk").map(e=>e.date));
-    return "Walk "+Math.round(walkDays.size/movementDays.size*100)+"%";
+    const pct=value=>Math.round(new Set(all.filter(e=>e.value===value).map(e=>e.date)).size/movementDays.size*100);
+    return "Walk "+pct("Walk")+"% · Lower "+pct("Lower Body Strength")+"% · Upper "+pct("Upper Body Strength")+"% · Spin "+pct("Spin")+"%";
   }
   return entries.length ? entries.length+"x this month" : "No entries yet";
 }
