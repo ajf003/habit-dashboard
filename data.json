@@ -712,6 +712,17 @@
           "value": "Walk"
         }
       ]
+    },
+    {
+      "id": "makeup",
+      "name": "Makeup",
+      "type": "occurrence",
+      "startDate": "2026-09-23",
+      "entries": [
+        {
+          "date": "2026-09-23"
+        }
+      ]
     }
   ]
 }
