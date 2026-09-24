@@ -224,7 +224,7 @@ function trackingSummary(h,data) {
     const strengthSessions=lower.size+upper.size;
     const lowerSplit=strengthSessions?Math.round(lower.size/strengthSessions*100):0;
     const upperSplit=strengthSessions?100-lowerSplit:0;
-    return "Walk "+pct("Walk")+"% · Strength "+strengthPct+"% (Lower "+lowerSplit+"% / Upper "+upperSplit+"%) · Spin "+pct("Spin")+"% · Pickleball "+pct("Pickleball")+"%";
+    return "Walk "+pct("Walk")+"%<br>Strength "+strengthPct+"% <span class=\"movement-split\">(Lower "+lowerSplit+"% / Upper "+upperSplit+"%)</span><br>Spin "+pct("Spin")+"% · Pickleball "+pct("Pickleball")+"%";
   }
   return entries.length ? entries.length+"x this month" : "No entries yet";
 }
@@ -400,7 +400,7 @@ async function render() {
       const label=document.createElement("div"); label.className="label";
       const name=document.createElement("b"); name.textContent=h.name; label.appendChild(name);
       const sub=document.createElement("span"); sub.className="subline";
-      const summary=document.createElement("span"); summary.textContent=trackingSummary(h,data); sub.appendChild(summary);
+      const summary=document.createElement("span"); summary.innerHTML=trackingSummary(h,data); sub.appendChild(summary);
       label.appendChild(sub); row.appendChild(label);
 
       const dates=trackingDates(h);
