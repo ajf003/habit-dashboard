@@ -346,7 +346,7 @@ async function render() {
         dots.appendChild(dot);
       }
       sub.appendChild(dots);
-      const count=document.createElement("span"); count.textContent=mi.count+"/2"+(mi.count===2?" ✓":""); sub.appendChild(count);
+      const count=document.createElement("span"); count.textContent=mi.count+"/2"; sub.appendChild(count);
     }
     if(status){const st=document.createElement("span");st.textContent=status;sub.appendChild(st);}
     const exactDates=[...(h.completedDates||[])];
