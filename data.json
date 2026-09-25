@@ -1039,6 +1039,18 @@
           "date": "2026-09-24"
         }
       ]
+    },
+    {
+      "id": "bowel-movements",
+      "name": "Bowel Movements",
+      "type": "amount",
+      "startDate": "2026-09-25",
+      "entries": [
+        {
+          "date": "2026-09-25",
+          "amount": 1
+        }
+      ]
     }
   ]
 }
