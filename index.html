@@ -195,6 +195,7 @@ function trackingSummary(h,data) {
     return "Up "+pct(up)+"% · Down "+pct(down)+"% · Hat "+pct(hats)+"%";
   }
   if(h.type==="amount") {
+    if(h.id==="bowel-movements") return "";
     const total=entries.reduce((sum,e)=>sum+(Number(e.amount)||0),0);
     return entries.length ? entries.length+"x · $"+total.toFixed(2)+" this month" : "No entries yet";
   }
