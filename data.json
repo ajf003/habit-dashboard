@@ -112,7 +112,7 @@
       "id": "get-ready",
       "name": "Get Ready",
       "startDate": "2026-09-23",
-      "completeThrough": "2026-09-25",
+      "completeThrough": "2026-09-26",
       "missedDates": []
     },
     {
@@ -140,7 +140,7 @@
       "id": "perfume",
       "name": "Perfume",
       "startDate": "2026-09-23",
-      "completeThrough": "2026-09-25",
+      "completeThrough": "2026-09-26",
       "missedDates": []
     },
     {
@@ -350,6 +350,13 @@
       "name": "Wash Face (PM)",
       "startDate": "2026-09-25",
       "completeThrough": "2026-09-25",
+      "missedDates": []
+    },
+    {
+      "id": "spf",
+      "name": "SPF",
+      "startDate": "2026-09-26",
+      "completeThrough": "2026-09-26",
       "missedDates": []
     }
   ],
