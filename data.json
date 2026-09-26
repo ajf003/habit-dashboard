@@ -21,7 +21,7 @@
       "id": "venlafaxine",
       "name": "Venlafaxine",
       "startDate": "2026-01-01",
-      "completeThrough": "2026-09-24",
+      "completeThrough": "2026-09-25",
       "missedDates": []
     },
     {
@@ -98,7 +98,7 @@
       "id": "podcast",
       "name": "Podcast",
       "startDate": "2026-09-20",
-      "completeThrough": "2026-09-24",
+      "completeThrough": "2026-09-25",
       "missedDates": []
     },
     {
@@ -741,6 +741,10 @@
         {
           "date": "2026-09-24",
           "value": "Down"
+        },
+        {
+          "date": "2026-09-25",
+          "value": "Up"
         }
       ]
     },
