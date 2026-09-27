@@ -128,7 +128,9 @@
       "name": "Hand Cream (PM)",
       "startDate": "2026-09-20",
       "completeThrough": "2026-09-25",
-      "missedDates": []
+      "missedDates": [
+        "2026-09-26"
+      ]
     },
     {
       "id": "shower",
@@ -354,7 +356,9 @@
       "name": "Wash Face (PM)",
       "startDate": "2026-09-25",
       "completeThrough": "2026-09-25",
-      "missedDates": []
+      "missedDates": [
+        "2026-09-26"
+      ]
     },
     {
       "id": "spf",
