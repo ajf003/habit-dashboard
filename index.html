@@ -79,6 +79,10 @@ function currentDailyStreak(h) {
   }
   if (!h.completeThrough) return 0;
   const missed = new Set(h.missedDates || []);
+  const latestMiss=(h.missedDates||[]).slice().sort().pop();
+  // A confirmed miss after the last completion means the streak is broken.
+  // Hide the old flame/count until a new completion starts a fresh streak.
+  if (latestMiss && latestMiss > h.completeThrough) return 0;
   let d = parseISO(h.completeThrough);
   const start = parseISO(h.streakStartDate || h.startDate);
   let n = 0;
