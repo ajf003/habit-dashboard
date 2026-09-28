@@ -1123,6 +1123,22 @@
           "amount": 1
         }
       ]
+    },
+    {
+      "id": "items-donated",
+      "name": "Items Donated",
+      "type": "amount",
+      "startDate": "2026-09-27",
+      "entries": [
+        {
+          "date": "2026-09-27",
+          "amount": 2
+        },
+        {
+          "date": "2026-09-28",
+          "amount": 1
+        }
+      ]
     }
   ]
 }
