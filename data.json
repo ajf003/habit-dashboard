@@ -161,7 +161,9 @@
       "name": "To Do List",
       "startDate": "2026-01-01",
       "completeThrough": null,
-      "missedDates": [],
+      "missedDates": [
+        "2026-09-27"
+      ],
       "completedDates": [
         "2026-01-01",
         "2026-01-02",
