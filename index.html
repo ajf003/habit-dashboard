@@ -448,6 +448,20 @@ async function render() {
     item.innerHTML=`<i style="background:${c}"></i>${MONTHS[m-1]}`;
     legend.appendChild(item);
   }
+
+  // Open the dashboard at the current Eastern-time month while keeping
+  // earlier and later months available by horizontal scrolling.
+  requestAnimationFrame(() => {
+    const card=document.querySelector(".card");
+    if(!card) return;
+    const today=easternTodayISO();
+    const month=Number(today.slice(5,7));
+    let daysBefore=0;
+    for(let m=1;m<month;m++) daysBefore+=daysInMonth(year,m);
+    const stickyLabelWidth=190;
+    const dayWidth=3;
+    card.scrollLeft=Math.max(0, stickyLabelWidth + daysBefore*dayWidth - stickyLabelWidth);
+  });
 }
 render().catch(err => {
   document.getElementById("tracker").innerHTML="<p>Habit data could not be loaded. Please refresh the page.</p>";
