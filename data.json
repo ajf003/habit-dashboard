@@ -35,7 +35,7 @@
       "id": "no-pop",
       "name": "No Pop",
       "startDate": "2026-06-15",
-      "completeThrough": "2026-09-27",
+      "completeThrough": "2026-09-28",
       "missedDates": []
     },
     {
@@ -101,7 +101,7 @@
       "id": "podcast",
       "name": "Podcast",
       "startDate": "2026-09-20",
-      "completeThrough": "2026-09-27",
+      "completeThrough": "2026-09-28",
       "missedDates": []
     },
     {
@@ -122,7 +122,7 @@
       "id": "daily-picture",
       "name": "Daily Picture",
       "startDate": "2026-09-23",
-      "completeThrough": "2026-09-27",
+      "completeThrough": "2026-09-28",
       "missedDates": []
     },
     {
@@ -370,7 +370,9 @@
       "name": "SPF",
       "startDate": "2026-09-26",
       "completeThrough": "2026-09-27",
-      "missedDates": []
+      "missedDates": [
+        "2026-09-28"
+      ]
     }
   ],
   "monthlyHabits": [
