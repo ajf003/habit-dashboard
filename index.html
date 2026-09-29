@@ -189,6 +189,20 @@ function weeklyInfo(h,data) {
 function trackingSummary(h,data) {
   const month=data.lastUpdated.slice(0,7);
   const entries=(h.entries||[]).filter(e=>e.date && e.date.startsWith(month));
+
+  function weeklyAmountAverage(item) {
+    const all=(item.entries||[]).filter(e=>e.date && Number.isFinite(Number(e.amount)));
+    if(!all.length) return "0";
+    const start=parseISO(item.startDate || all[0].date);
+    const end=parseISO(easternTodayISO());
+    const firstWeek=startOfWeekSunday(start);
+    const lastWeek=startOfWeekSunday(end);
+    const weeks=Math.max(1,Math.round((lastWeek-firstWeek)/(7*86400000))+1);
+    const total=all.filter(e=>parseISO(e.date)>=start && parseISO(e.date)<=end)
+      .reduce((sum,e)=>sum+Number(e.amount),0);
+    return (total/weeks).toFixed(1).replace(/\.0$/,"");
+  }
+
   if(h.type==="choice") {
     const all=(h.entries||[]).filter(e=>e.date);
     if(!all.length) return "No entries yet";
@@ -199,9 +213,11 @@ function trackingSummary(h,data) {
     return "Up "+pct(up)+"% · Down "+pct(down)+"% · Hat "+pct(hats)+"%";
   }
   if(h.type==="amount") {
-    if(h.id==="bowel-movements") return "";
+    if(h.id==="bowel-movements" || h.id==="items-donated") {
+      return "Weekly avg: "+weeklyAmountAverage(h);
+    }
     const total=entries.reduce((sum,e)=>sum+(Number(e.amount)||0),0);
-    return entries.length ? entries.length+"x · $"+total.toFixed(2)+" this month" : "No entries yet";
+    return entries.length ? entries.length+"x · "+total.toFixed(2)+" this month" : "No entries yet";
   }
   if(h.type==="occurrence") {
     const all=(h.entries||[]).filter(e=>e.date).map(e=>e.date).sort();
@@ -232,22 +248,23 @@ function trackingSummary(h,data) {
     return labels.join(" · ");
   }
   if(h.id==="movement-type" || h.type==="multi-choice") {
-    const all=(h.entries||[]).filter(e=>e.date);
-    if(!all.length) return "No entries yet";
-    const movementDays=new Set(all.map(e=>e.date));
-    const daysFor=value=>new Set(all.filter(e=>e.value===value).map(e=>e.date));
+    const raw=(h.entries||[]).filter(e=>e.date);
+    if(!raw.length) return "No entries yet";
+    const expanded=raw.flatMap(e => (Array.isArray(e.value)?e.value:[e.value]).filter(Boolean).map(value=>({...e,value})));
+    const movementDays=new Set(expanded.map(e=>e.date));
+    const daysFor=value=>new Set(expanded.filter(e=>e.value===value).map(e=>e.date));
     const pct=value=>Math.round(daysFor(value).size/movementDays.size*100);
     const lower=daysFor("Lower Body Strength"), upper=daysFor("Upper Body Strength");
     const strength=new Set([...lower,...upper]);
     const strengthPct=Math.round(strength.size/movementDays.size*100);
     const strengthSessions=lower.size+upper.size;
-    const lowerSplit=strengthSessions?Math.round(lower.size/strengthSessions*100):0;
-    const upperSplit=strengthSessions?100-lowerSplit:0;
-    const walksWithMiles=all.filter(e=>e.value==="Walk" && Number.isFinite(Number(e.miles)));
+    const lowerPct=strengthSessions?Math.round(strengthPct*(lower.size/strengthSessions)):0;
+    const upperPct=strengthPct-lowerPct;
+    const walksWithMiles=expanded.filter(e=>e.value==="Walk" && Number.isFinite(Number(e.miles)));
     const avgMiles=arr=>arr.length ? (arr.reduce((sum,e)=>sum+Number(e.miles),0)/arr.length).toFixed(2) : "—";
     const augWalks=walksWithMiles.filter(e=>e.date.startsWith("2026-08"));
     const sepWalks=walksWithMiles.filter(e=>e.date.startsWith("2026-09"));
-    return "Walk "+pct("Walk")+"%<br><span class=\"movement-split\">Avg walk: Aug "+avgMiles(augWalks)+" mi · Sep "+avgMiles(sepWalks)+" mi · Overall "+avgMiles(walksWithMiles)+" mi</span><br>Strength "+strengthPct+"% <span class=\"movement-split\">(Lower "+lowerSplit+"% / Upper "+upperSplit+"%)</span><br>Spin "+pct("Spin")+"% · Run "+pct("Run")+"%<br>Core "+pct("Core")+"% · Pickleball "+pct("Pickleball")+"%";
+    return "Walk "+pct("Walk")+"%<br><span class=\"movement-split\">Avg walk: Aug "+avgMiles(augWalks)+" mi · Sep "+avgMiles(sepWalks)+" mi · Overall "+avgMiles(walksWithMiles)+" mi</span><br>Strength "+strengthPct+"% <span class=\"movement-split\">(Lower "+lowerPct+"% / Upper "+upperPct+"%)</span><br>Spin "+pct("Spin")+"% · Run "+pct("Run")+"%<br>Core "+pct("Core")+"% · Pickleball "+pct("Pickleball")+"%";
   }
   return entries.length ? entries.length+"x this month" : "No entries yet";
 }
