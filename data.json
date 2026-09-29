@@ -56,7 +56,7 @@
       "id": "movement",
       "name": "20 Min Movement",
       "startDate": "2026-08-01",
-      "completeThrough": "2026-09-28",
+      "completeThrough": "2026-09-29",
       "missedDates": [],
       "completedDates": [
         "2026-08-01",
@@ -93,7 +93,8 @@
         "2026-09-25",
         "2026-09-26",
         "2026-09-27",
-        "2026-09-28"
+        "2026-09-28",
+        "2026-09-29"
       ],
       "streakStartDate": "2026-09-19"
     },
@@ -1127,8 +1128,17 @@
         },
         {
           "date": "2026-09-28",
-          "value": "Walk",
+          "value": [
+            "Walk",
+            "Lower Body Strength"
+          ],
           "miles": 2.45
+        },
+        {
+          "date": "2026-09-29",
+          "value": [
+            "Lower Body Strength"
+          ]
         }
       ]
     },
