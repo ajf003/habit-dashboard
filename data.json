@@ -140,7 +140,8 @@
       "startDate": "2026-09-19",
       "completeThrough": "2026-09-28",
       "missedDates": [
-        "2026-09-26"
+        "2026-09-26",
+        "2026-09-27"
       ],
       "streakStartDate": "2026-09-28",
       "completedDates": [
