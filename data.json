@@ -410,9 +410,13 @@
       "id": "spf",
       "name": "SPF",
       "startDate": "2026-09-26",
-      "completeThrough": "2026-09-27",
+      "completeThrough": "2026-09-29",
       "missedDates": [
         "2026-09-28"
+      ],
+      "streakStartDate": "2026-09-29",
+      "completedDates": [
+        "2026-09-29"
       ]
     }
   ],
