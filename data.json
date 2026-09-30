@@ -35,7 +35,7 @@
       "id": "no-pop",
       "name": "No Pop",
       "startDate": "2026-06-15",
-      "completeThrough": "2026-09-28",
+      "completeThrough": "2026-09-29",
       "missedDates": []
     },
     {
@@ -123,14 +123,14 @@
       "id": "daily-picture",
       "name": "Daily Picture",
       "startDate": "2026-09-23",
-      "completeThrough": "2026-09-28",
+      "completeThrough": "2026-09-29",
       "missedDates": []
     },
     {
       "id": "hand-retinol-cream",
       "name": "Hand Cream (PM)",
       "startDate": "2026-09-20",
-      "completeThrough": "2026-09-28",
+      "completeThrough": "2026-09-29",
       "missedDates": [
         "2026-09-26"
       ]
@@ -836,6 +836,10 @@
         },
         {
           "date": "2026-09-28",
+          "value": "Down"
+        },
+        {
+          "date": "2026-09-29",
           "value": "Down"
         }
       ]
