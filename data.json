@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "year": 2026,
-  "lastUpdated": "2026-09-29",
+  "lastUpdated": "2026-09-30",
   "monthColors": {
     "10": null,
     "11": null,
@@ -28,7 +28,7 @@
       "id": "gratitudes",
       "name": "Gratitudes",
       "startDate": "2026-01-01",
-      "completeThrough": "2026-09-29",
+      "completeThrough": "2026-09-30",
       "missedDates": []
     },
     {
@@ -42,14 +42,14 @@
       "id": "calendar",
       "name": "Calendar",
       "startDate": "2026-08-01",
-      "completeThrough": "2026-09-28",
+      "completeThrough": "2026-09-29",
       "missedDates": []
     },
     {
       "id": "daily-highlight",
       "name": "Daily Highlight",
       "startDate": "2026-09-01",
-      "completeThrough": "2026-09-28",
+      "completeThrough": "2026-09-29",
       "missedDates": []
     },
     {
@@ -394,7 +394,8 @@
         "2026-09-25",
         "2026-09-26",
         "2026-09-28",
-        "2026-09-29"
+        "2026-09-29",
+        "2026-09-30"
       ]
     },
     {
