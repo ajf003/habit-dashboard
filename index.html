@@ -222,6 +222,14 @@ function trackingSummary(h,data) {
   if(h.type==="occurrence") {
     const all=(h.entries||[]).filter(e=>e.date).map(e=>e.date).sort();
     if(!all.length) return "No entries yet";
+    if(h.id==="shave-body") {
+      if(all.length<2) return "1 shave logged";
+      const gaps=[];
+      for(let i=1;i<all.length;i++) gaps.push(dayDiff(all[i-1],all[i]));
+      const avg=gaps.reduce((a,b)=>a+b,0)/gaps.length;
+      const rounded=Math.round(avg*10)/10;
+      return "About every "+(Number.isInteger(rounded)?rounded:rounded.toFixed(1))+" days";
+    }
     const start=parseISO(h.startDate || all[0]);
     const nowParts=new Intl.DateTimeFormat("en-US",{timeZone:"America/New_York",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
     const part=t=>Number(nowParts.find(p=>p.type===t).value);
