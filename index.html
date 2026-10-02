@@ -289,6 +289,7 @@ async function render() {
   const data = await res.json();
   const year = data.year;
   const asOf=parseISO(data.lastUpdated);
+  const todayISO=easternTodayISO();
   // Header date follows the real calendar day in Eastern Time.
   // Habit completion/status still uses data.lastUpdated, preserving unconfirmed days.
   function updateDashboardDate() {
@@ -333,7 +334,6 @@ async function render() {
   for(const h of data.dailyHabits) {
     const row=document.createElement("div"); row.className="row";
     const label=document.createElement("div"); label.className="label daily-label";
-    const todayISO=easternTodayISO();
     const doneToday=isDailyComplete(h,todayISO);
     const todayMonth=todayISO.slice(5,7);
     const check=doneToday ? ` <span style="color:${data.monthColors[todayMonth] || FALLBACK};font-weight:700">✓</span>` : "";
