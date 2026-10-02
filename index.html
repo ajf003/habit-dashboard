@@ -361,10 +361,14 @@ async function render() {
       const name=document.createElement("b"); name.textContent=h.name; label.appendChild(name);
       const sub=document.createElement("span"); sub.className="subline";
       const dots=document.createElement("span"); dots.className="weekly-dots";
-      const currentColor=data.monthColors[String(info.weekStart.getMonth()+1).padStart(2,"0")] || FALLBACK;
+      const currentWeekDates=(h.completedDates||[]).filter(ds=>{const dt=parseISO(ds);return dt>=info.weekStart&&dt<=info.weekEnd;}).sort();
       for(let i=0;i<info.target;i++) {
         const dot=document.createElement("i"); dot.className="weekly-dot";
-        if(i<info.count){dot.style.background=currentColor;dot.style.borderColor=currentColor;}
+        if(i<info.count){
+          const completionDate=currentWeekDates[i];
+          const dotColor=completionDate ? (data.monthColors[completionDate.slice(5,7)] || FALLBACK) : FALLBACK;
+          dot.style.background=dotColor;dot.style.borderColor=dotColor;
+        }
         dots.appendChild(dot);
       }
       sub.appendChild(dots);
