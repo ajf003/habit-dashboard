@@ -147,7 +147,7 @@
       "id": "shower",
       "name": "Shower",
       "startDate": "2026-09-19",
-      "completeThrough": "2026-10-01",
+      "completeThrough": "2026-10-02",
       "missedDates": [
         "2026-09-26",
         "2026-09-27"
@@ -164,7 +164,8 @@
         "2026-09-28",
         "2026-09-29",
         "2026-09-30",
-        "2026-10-01"
+        "2026-10-01",
+        "2026-10-02"
       ]
     },
     {
@@ -420,10 +421,11 @@
       "id": "wash-face-am",
       "name": "Wash Face (AM)",
       "startDate": "2026-10-01",
-      "completeThrough": "2026-10-01",
+      "completeThrough": "2026-10-02",
       "missedDates": [],
       "completedDates": [
-        "2026-10-01"
+        "2026-10-01",
+        "2026-10-02"
       ],
       "streakStartDate": "2026-10-01"
     },
