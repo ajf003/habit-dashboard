@@ -412,6 +412,17 @@
       ]
     },
     {
+      "id": "wash-face-am",
+      "name": "Wash Face (AM)",
+      "startDate": "2026-10-01",
+      "completeThrough": "2026-10-01",
+      "missedDates": [],
+      "completedDates": [
+        "2026-10-01"
+      ],
+      "streakStartDate": "2026-10-01"
+    },
+    {
       "id": "wash-face-pm",
       "name": "Wash Face (PM)",
       "startDate": "2026-09-25",
