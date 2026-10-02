@@ -143,7 +143,7 @@
       "id": "shower",
       "name": "Shower",
       "startDate": "2026-09-19",
-      "completeThrough": "2026-09-30",
+      "completeThrough": "2026-10-01",
       "missedDates": [
         "2026-09-26",
         "2026-09-27"
@@ -159,17 +159,22 @@
         "2026-09-25",
         "2026-09-28",
         "2026-09-29",
-        "2026-09-30"
+        "2026-09-30",
+        "2026-10-01"
       ]
     },
     {
       "id": "perfume",
       "name": "Perfume",
       "startDate": "2026-09-23",
-      "completeThrough": "2026-09-29",
+      "completeThrough": "2026-10-01",
       "missedDates": [
         "2026-09-30"
-      ]
+      ],
+      "completedDates": [
+        "2026-10-01"
+      ],
+      "streakStartDate": "2026-10-01"
     },
     {
       "id": "eye-drops",
