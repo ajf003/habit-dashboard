@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "year": 2026,
-  "lastUpdated": "2026-10-01",
+  "lastUpdated": "2026-10-02",
   "monthColors": {
     "10": "#4c3f7d",
     "11": null,
@@ -28,7 +28,7 @@
       "id": "gratitudes",
       "name": "Gratitudes",
       "startDate": "2026-01-01",
-      "completeThrough": "2026-10-01",
+      "completeThrough": "2026-10-02",
       "missedDates": []
     },
     {
@@ -408,7 +408,8 @@
         "2026-09-28",
         "2026-09-29",
         "2026-09-30",
-        "2026-10-01"
+        "2026-10-01",
+        "2026-10-02"
       ]
     },
     {
@@ -1289,10 +1290,15 @@
         {
           "date": "2026-10-01",
           "amount": 1
+        },
+        {
+          "date": "2026-10-02",
+          "amount": 1
         }
       ],
       "reportedDates": [
-        "2026-10-01"
+        "2026-10-01",
+        "2026-10-02"
       ]
     },
     {
