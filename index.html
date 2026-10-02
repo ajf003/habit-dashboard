@@ -359,6 +359,14 @@ async function render() {
       const label=document.createElement("div"); label.className="label";
       label.style.gap="7px";
       const name=document.createElement("b"); name.textContent=h.name; label.appendChild(name);
+      const trackingReportedToday=(h.reportedDates||[]).includes(todayISO) || (h.entries||[]).some(e=>e.date===todayISO);
+      if(trackingReportedToday){
+        const check=document.createElement("span");
+        check.textContent=" ✓";
+        check.style.color=data.monthColors[todayISO.slice(5,7)] || FALLBACK;
+        check.style.fontWeight="700";
+        label.appendChild(check);
+      }
       const sub=document.createElement("span"); sub.className="subline";
       const dots=document.createElement("span"); dots.className="weekly-dots";
       const currentWeekDates=(h.completedDates||[]).filter(ds=>{const dt=parseISO(ds);return dt>=info.weekStart&&dt<=info.weekEnd;}).sort();
