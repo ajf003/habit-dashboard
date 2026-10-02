@@ -274,7 +274,8 @@ function trackingSummary(h,data) {
     const avgMiles=arr=>arr.length ? (arr.reduce((sum,e)=>sum+Number(e.miles),0)/arr.length).toFixed(2) : "—";
     const augWalks=walksWithMiles.filter(e=>e.date.startsWith("2026-08"));
     const sepWalks=walksWithMiles.filter(e=>e.date.startsWith("2026-09"));
-    return "Walk "+pct("Walk")+"%<br><span class=\"movement-split\">Avg walk: Aug "+avgMiles(augWalks)+" mi · Sep "+avgMiles(sepWalks)+" mi · Overall "+avgMiles(walksWithMiles)+" mi</span><br>Strength "+strengthPct+"% <span class=\"movement-split\">(Lower "+lowerPct+"% / Upper "+upperPct+"%)</span><br>Spin "+pct("Spin")+"% · Run "+pct("Run")+"%<br>Core "+pct("Core")+"% · Pickleball "+pct("Pickleball")+"%";
+    const octWalks=walksWithMiles.filter(e=>e.date.startsWith("2026-10"));
+    return "Walk "+pct("Walk")+"%<br><span class=\"movement-split\">Avg walk: Aug "+avgMiles(augWalks)+" mi · Sep "+avgMiles(sepWalks)+" mi · Oct "+avgMiles(octWalks)+" mi · Overall "+avgMiles(walksWithMiles)+" mi</span><br>Strength "+strengthPct+"% <span class=\"movement-split\">(Lower "+lowerPct+"% / Upper "+upperPct+"%)</span><br>Spin "+pct("Spin")+"% · Run "+pct("Run")+"%<br>Core "+pct("Core")+"% · Pickleball "+pct("Pickleball")+"%";
   }
   return entries.length ? entries.length+"x this month" : "No entries yet";
 }
@@ -453,6 +454,12 @@ async function render() {
       const row=document.createElement("div"); row.className="row";
       const label=document.createElement("div"); label.className="label";
       const name=document.createElement("b"); name.textContent=h.name; label.appendChild(name);
+      const trackingReportedToday=(h.reportedDates||[]).includes(todayISO) || (h.entries||[]).some(e=>e.date===todayISO);
+      if(trackingReportedToday){
+        const check=document.createElement("span"); check.textContent=" ✓";
+        check.style.color=data.monthColors[todayISO.slice(5,7)] || FALLBACK;
+        check.style.fontWeight="700"; label.appendChild(check);
+      }
       const sub=document.createElement("span"); sub.className="subline";
       const summary=document.createElement("span"); summary.innerHTML=trackingSummary(h,data); sub.appendChild(summary);
       label.appendChild(sub); row.appendChild(label);
