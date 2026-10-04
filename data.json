@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "year": 2026,
-  "lastUpdated": "2026-10-03",
+  "lastUpdated": "2026-10-04",
   "monthColors": {
     "10": "#4c3f7d",
     "11": null,
@@ -22,14 +22,20 @@
       "name": "Venlafaxine",
       "startDate": "2026-01-01",
       "completeThrough": "2026-10-01",
-      "missedDates": []
+      "missedDates": [],
+      "completedDates": [
+        "2026-10-04"
+      ]
     },
     {
       "id": "gratitudes",
       "name": "Gratitudes",
       "startDate": "2026-01-01",
       "completeThrough": "2026-10-02",
-      "missedDates": []
+      "missedDates": [],
+      "completedDates": [
+        "2026-10-04"
+      ]
     },
     {
       "id": "no-pop",
@@ -50,7 +56,10 @@
       "name": "Daily Highlight",
       "startDate": "2026-09-01",
       "completeThrough": "2026-10-01",
-      "missedDates": []
+      "missedDates": [],
+      "completedDates": [
+        "2026-10-03"
+      ]
     },
     {
       "id": "movement",
@@ -177,7 +186,8 @@
         "2026-09-30"
       ],
       "completedDates": [
-        "2026-10-01"
+        "2026-10-01",
+        "2026-10-04"
       ],
       "streakStartDate": "2026-10-01"
     },
@@ -186,7 +196,10 @@
       "name": "Eye Drops",
       "startDate": "2026-09-24",
       "completeThrough": "2026-10-01",
-      "missedDates": []
+      "missedDates": [],
+      "completedDates": [
+        "2026-10-04"
+      ]
     },
     {
       "id": "to-do-list",
@@ -414,7 +427,8 @@
         "2026-09-29",
         "2026-09-30",
         "2026-10-01",
-        "2026-10-02"
+        "2026-10-02",
+        "2026-10-04"
       ]
     },
     {
@@ -425,7 +439,8 @@
       "missedDates": [],
       "completedDates": [
         "2026-10-01",
-        "2026-10-02"
+        "2026-10-02",
+        "2026-10-04"
       ],
       "streakStartDate": "2026-10-01"
     },
