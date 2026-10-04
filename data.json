@@ -113,8 +113,14 @@
       "id": "podcast",
       "name": "Podcast",
       "startDate": "2026-09-20",
-      "completeThrough": "2026-10-01",
-      "missedDates": []
+      "completeThrough": "2026-10-04",
+      "missedDates": [],
+      "completedDates": [
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03",
+        "2026-10-04"
+      ]
     },
     {
       "id": "read",
