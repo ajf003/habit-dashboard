@@ -21,9 +21,11 @@
       "id": "venlafaxine",
       "name": "Venlafaxine",
       "startDate": "2026-01-01",
-      "completeThrough": "2026-10-01",
+      "completeThrough": "2026-10-04",
       "missedDates": [],
       "completedDates": [
+        "2026-10-02",
+        "2026-10-03",
         "2026-10-04"
       ]
     },
@@ -31,9 +33,11 @@
       "id": "gratitudes",
       "name": "Gratitudes",
       "startDate": "2026-01-01",
-      "completeThrough": "2026-10-02",
+      "completeThrough": "2026-10-04",
       "missedDates": [],
       "completedDates": [
+        "2026-10-02",
+        "2026-10-03",
         "2026-10-04"
       ]
     },
