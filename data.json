@@ -208,9 +208,11 @@
       "id": "eye-drops",
       "name": "Eye Drops",
       "startDate": "2026-09-24",
-      "completeThrough": "2026-10-01",
+      "completeThrough": "2026-10-04",
       "missedDates": [],
       "completedDates": [
+        "2026-10-02",
+        "2026-10-03",
         "2026-10-04"
       ]
     },
@@ -448,11 +450,12 @@
       "id": "wash-face-am",
       "name": "Wash Face (AM)",
       "startDate": "2026-10-01",
-      "completeThrough": "2026-10-02",
+      "completeThrough": "2026-10-04",
       "missedDates": [],
       "completedDates": [
         "2026-10-01",
         "2026-10-02",
+        "2026-10-03",
         "2026-10-04"
       ],
       "streakStartDate": "2026-10-01"
@@ -478,11 +481,13 @@
       "completeThrough": "2026-09-29",
       "missedDates": [
         "2026-09-28",
-        "2026-09-30"
+        "2026-09-30",
+        "2026-10-04"
       ],
       "streakStartDate": "2026-09-29",
       "completedDates": [
-        "2026-09-29"
+        "2026-09-29",
+        "2026-10-03"
       ]
     }
   ],
