@@ -59,10 +59,12 @@
       "id": "daily-highlight",
       "name": "Daily Highlight",
       "startDate": "2026-09-01",
-      "completeThrough": "2026-10-01",
+      "completeThrough": "2026-10-04",
       "missedDates": [],
       "completedDates": [
-        "2026-10-03"
+        "2026-10-02",
+        "2026-10-03",
+        "2026-10-04"
       ]
     },
     {
