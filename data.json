@@ -60,6 +60,7 @@
       "missedDates": [],
       "completedDates": [
         "2026-09-30",
+        "2026-10-01",
         "2026-10-04"
       ]
     },
@@ -158,6 +159,7 @@
       "completeThrough": "2026-09-29",
       "missedDates": [
         "2026-09-30",
+        "2026-10-01",
         "2026-10-04"
       ],
       "completedDates": []
