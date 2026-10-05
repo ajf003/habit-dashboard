@@ -1411,6 +1411,21 @@
       "reportedDates": [
         "2026-10-01"
       ]
+    },
+    {
+      "id": "burn-candle",
+      "name": "Burn Candle",
+      "type": "occurrence",
+      "startDate": "2026-10-04",
+      "entries": [
+        {
+          "date": "2026-10-05"
+        }
+      ],
+      "reportedDates": [
+        "2026-10-04",
+        "2026-10-05"
+      ]
     }
   ]
 }
