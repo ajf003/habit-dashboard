@@ -53,8 +53,11 @@
       "id": "calendar",
       "name": "Calendar",
       "startDate": "2026-08-01",
-      "completeThrough": "2026-09-29",
-      "missedDates": []
+      "completeThrough": "2026-09-30",
+      "missedDates": [],
+      "completedDates": [
+        "2026-09-30"
+      ]
     },
     {
       "id": "daily-highlight",
