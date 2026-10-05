@@ -1426,6 +1426,14 @@
         "2026-10-04",
         "2026-10-05"
       ]
+    },
+    {
+      "id": "no-spend-days",
+      "name": "No Spend Days",
+      "type": "occurrence",
+      "startDate": "2026-10-05",
+      "entries": [],
+      "reportedDates": []
     }
   ]
 }
