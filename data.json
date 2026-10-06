@@ -545,6 +545,17 @@
         "2026-09-29",
         "2026-10-03"
       ]
+    },
+    {
+      "id": "make-bed",
+      "name": "Make Bed",
+      "startDate": "2026-10-05",
+      "completeThrough": "2026-10-05",
+      "missedDates": [],
+      "completedDates": [
+        "2026-10-05"
+      ],
+      "streakStartDate": "2026-10-01"
     }
   ],
   "monthlyHabits": [
