@@ -63,32 +63,18 @@ function dayDiff(a,b) {
   return Math.round((parseISO(b)-parseISO(a))/86400000);
 }
 function currentDailyStreak(h) {
-  const explicit=(h.completedDates||[]).slice().sort();
-  if (!h.completeThrough && explicit.length) {
-    const done=new Set(explicit);
-    let d=parseISO(explicit[explicit.length-1]);
-    const start=parseISO(h.startDate);
-    let n=0;
-    while(d>=start) {
-      const key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-      if(!done.has(key)) break;
-      n++;
-      d.setDate(d.getDate()-1);
-    }
-    return n;
-  }
-  if (!h.completeThrough) return 0;
+  const explicit = new Set(h.completedDates || []);
   const missed = new Set(h.missedDates || []);
-  const latestMiss=(h.missedDates||[]).slice().sort().pop();
-  // A confirmed miss after the last completion means the streak is broken.
-  // Hide the old flame/count until a new completion starts a fresh streak.
-  if (latestMiss && latestMiss > h.completeThrough) return 0;
-  let d = parseISO(h.completeThrough);
+  const candidates = [...explicit];
+  if (h.completeThrough) candidates.push(h.completeThrough);
+  if (!candidates.length) return 0;
+  let d = parseISO(candidates.slice().sort().pop());
   const start = parseISO(h.streakStartDate || h.startDate);
   let n = 0;
   while (d >= start) {
     const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-    if (missed.has(key)) break;
+    const done = explicit.has(key) || (!!h.completeThrough && key <= h.completeThrough && key >= h.startDate);
+    if (!done || missed.has(key)) break;
     n++;
     d.setDate(d.getDate()-1);
   }
