@@ -1645,8 +1645,12 @@
         },
         {
           "date": "2026-10-14",
-          "value": "Walk",
-          "miles": 1.64
+          "value": [
+            "Walk",
+            "Lower Body Strength"
+          ],
+          "miles": 1.64,
+          "notes": "15 squats"
         },
         {
           "date": "2026-10-15",
