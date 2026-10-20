@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "year": 2026,
-  "lastUpdated": "2026-10-19",
+  "lastUpdated": "2026-10-20",
   "monthColors": {
     "10": "#4c3f7d",
     "11": null,
@@ -2184,11 +2184,7 @@
       "name": "No Spend Days",
       "type": "occurrence",
       "startDate": "2026-10-01",
-      "entries": [
-        {
-          "date": "2026-10-19"
-        }
-      ],
+      "entries": [],
       "reportedDates": [
         "2026-10-01",
         "2026-10-02",
