@@ -2328,13 +2328,16 @@
       "id": "eat-at-home",
       "name": "Eat at Home",
       "type": "occurrence",
-      "startDate": "2026-10-19",
+      "startDate": "2026-10-16",
       "entries": [
         {
           "date": "2026-10-20"
         }
       ],
       "reportedDates": [
+        "2026-10-16",
+        "2026-10-17",
+        "2026-10-18",
         "2026-10-19",
         "2026-10-20"
       ]
