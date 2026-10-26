@@ -2584,6 +2584,22 @@
         "2026-10-22",
         "2026-10-25"
       ]
+    },
+    {
+      "id": "tv-show",
+      "name": "TV Show",
+      "type": "occurrence",
+      "startDate": "2026-10-26",
+      "entries": [],
+      "reportedDates": []
+    },
+    {
+      "id": "watched-movie",
+      "name": "Watched Movie",
+      "type": "occurrence",
+      "startDate": "2026-10-26",
+      "entries": [],
+      "reportedDates": []
     }
   ]
 }
