@@ -2611,9 +2611,15 @@
       "id": "watched-movie",
       "name": "Watched Movie",
       "type": "occurrence",
-      "startDate": "2026-10-26",
-      "entries": [],
-      "reportedDates": []
+      "startDate": "2026-10-24",
+      "entries": [
+        {
+          "date": "2026-10-24"
+        }
+      ],
+      "reportedDates": [
+        "2026-10-24"
+      ]
     }
   ]
 }
