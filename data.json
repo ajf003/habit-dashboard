@@ -2704,13 +2704,17 @@
       "id": "tv-show",
       "name": "TV Show",
       "type": "occurrence",
-      "startDate": "2026-10-26",
+      "startDate": "2026-10-20",
       "entries": [
+        {
+          "date": "2026-10-20"
+        },
         {
           "date": "2026-10-26"
         }
       ],
       "reportedDates": [
+        "2026-10-20",
         "2026-10-26"
       ]
     },
