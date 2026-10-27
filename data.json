@@ -2590,8 +2590,14 @@
       "name": "TV Show",
       "type": "occurrence",
       "startDate": "2026-10-26",
-      "entries": [],
-      "reportedDates": []
+      "entries": [
+        {
+          "date": "2026-10-26"
+        }
+      ],
+      "reportedDates": [
+        "2026-10-26"
+      ]
     },
     {
       "id": "watched-movie",
