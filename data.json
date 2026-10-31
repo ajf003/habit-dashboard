@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "year": 2026,
-  "lastUpdated": "2026-10-30",
+  "lastUpdated": "2026-10-31",
   "monthColors": {
     "10": "#4c3f7d",
     "11": null,
@@ -279,7 +279,8 @@
         "2026-10-27",
         "2026-10-28",
         "2026-10-29",
-        "2026-10-30"
+        "2026-10-30",
+        "2026-10-31"
       ],
       "streakStartDate": "2026-09-19"
     },
@@ -2281,6 +2282,12 @@
           ],
           "minutes": 40,
           "notes": "Peloton and upper body lift; 40 minutes total"
+        },
+        {
+          "date": "2026-10-31",
+          "value": "Spin",
+          "minutes": 20,
+          "notes": "Peloton ride"
         }
       ],
       "reportedDates": [
@@ -2313,7 +2320,8 @@
         "2026-10-27",
         "2026-10-28",
         "2026-10-29",
-        "2026-10-30"
+        "2026-10-30",
+        "2026-10-31"
       ]
     },
     {
