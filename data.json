@@ -1042,6 +1042,16 @@
         "2026-10-28"
       ],
       "streakStartDate": "2026-10-01"
+    },
+    {
+      "id": "magnesium",
+      "name": "Magnesium",
+      "startDate": "2026-11-01",
+      "completeThrough": null,
+      "missedDates": [],
+      "completedDates": [
+        "2026-11-01"
+      ]
     }
   ],
   "monthlyHabits": [
@@ -1229,7 +1239,8 @@
         "2026-10-07",
         "2026-10-10",
         "2026-10-19",
-        "2026-10-25"
+        "2026-10-25",
+        "2026-11-01"
       ],
       "missedDates": [
         "2026-10-20",
