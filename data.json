@@ -354,7 +354,9 @@
       "missedDates": [
         "2026-11-01"
       ],
-      "completedDates": []
+      "completedDates": [
+        "2026-11-02"
+      ]
     },
     {
       "id": "read",
