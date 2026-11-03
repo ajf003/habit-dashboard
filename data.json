@@ -2930,9 +2930,14 @@
       "name": "TV Show",
       "type": "occurrence",
       "startDate": "2026-11-01",
-      "entries": [],
+      "entries": [
+        {
+          "date": "2026-11-02"
+        }
+      ],
       "reportedDates": [
-        "2026-11-01"
+        "2026-11-01",
+        "2026-11-02"
       ]
     },
     {
