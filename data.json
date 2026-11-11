@@ -1824,7 +1824,8 @@
         },
         {
           "date": "2026-11-10",
-          "value": "Down"
+          "value": "Down",
+          "note": "Hat"
         }
       ],
       "reportedDates": [
