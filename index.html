@@ -68,7 +68,13 @@ function currentDailyStreak(h) {
   const candidates = [...explicit];
   if (h.completeThrough) candidates.push(h.completeThrough);
   if (!candidates.length) return 0;
+  // A streak is current only if the habit was completed today or yesterday.
+  // Older consecutive runs are historical streaks and should not show a flame.
+  const today = parseISO(easternTodayISO());
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
   let d = parseISO(candidates.slice().sort().pop());
+  if (d < yesterday || d > today) return 0;
   const start = parseISO(h.streakStartDate || h.startDate);
   let n = 0;
   while (d >= start) {
