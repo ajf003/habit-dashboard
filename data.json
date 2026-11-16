@@ -2780,8 +2780,12 @@
         },
         {
           "date": "2026-11-16",
-          "value": "HIIT",
-          "minutes": 20
+          "value": [
+            "HIIT",
+            "Walk"
+          ],
+          "minutes": 20,
+          "miles": 1.47
         }
       ],
       "reportedDates": [
